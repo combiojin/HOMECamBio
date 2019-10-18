@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cambio.org.member.MemberDAO;
+import com.cambio.org.member.MemberDTO;
+
 @WebServlet("*.do")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private MemberDAO dm = MemberDAO.getInstance();
 
     public MainController() {
         super();
@@ -32,6 +36,10 @@ public class MainController extends HttpServlet {
 		}
 		else if(cmd.equals("/singup.do")) {
 			rd = request.getRequestDispatcher("/Singup/singup.jsp");
+		}
+		else if(cmd.equals("/singupProc.do")) {
+			dm.memberinsert(request);
+			rd = request.getRequestDispatcher("index.jsp");
 		}
 		else if(cmd.equals("/memberForm.do")) {
 			rd = request.getRequestDispatcher("/Member/memberForm.jsp");
