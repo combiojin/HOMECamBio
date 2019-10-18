@@ -11,22 +11,28 @@
 	<div class="container">
 		<jsp:include page="/menu.jsp" />
 		<!-- 중간 -->
-		<div class="row"><!-- xs( xm md lg -->
-			<div class="col-xs-12">
-				<form action="${path}/memberInsertProc.do">
+		<div class="row rowpd"><!-- xs( xm md lg -->
+			<div class="col-xs-4">
+			</div>
+			<div class="col-xs-4">
+				<form action="${path}/memberProc.do">
 					<div class="form-group">
-						<label for="id">ID:</label>
+						<label class="labelfont" for="id">아이디:</label>
 						<input type="text" class="form-control" id="id" name="id">
 					</div>
 					<div class="form-group">
-						<label for="pwd">Password:</label>
+						<label class="labelfont" for="pwd">비밀번호:</label>
 						<input type="password" class="form-control" id="pwd" name="pwd">
 					</div>
 					<div class="checkbox">
-						<label><input type="checkbox" name="save"> Remember me</label>
+						<label><input type="checkbox" name="save"> 아이디저장 </label>
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
+					<div class="buttondiv">
+						<button type="submit" class="btn btn-default">로그인</button>
+					</div>
 				</form>
+			</div>
+			<div class="col-xs-4">
 			</div>
 		</div>
 		<!-- 발 -->

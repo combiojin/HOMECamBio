@@ -42,5 +42,15 @@
 	.carousel-inner img {
       width: 100%;
       height: 100%;
-   }
+    }
+    .labelfont {
+    	font-size: 15px;
+    }
+    .buttondiv {
+    	width: 100%;
+    	text-align: center;
+    }
+    .rowpd {
+    	padding: 30px;
+    }
    

@@ -11,44 +11,46 @@
 	<div class="container">
 		<jsp:include page="/menu.jsp" />
 		<!-- 중간 -->
-		<div class="row"><!-- xs( xm md lg -->
+		<div class="row rowpd"><!-- xs( xm md lg -->
 			<div class="col-xs-4 singup">
 			</div>
 			<div class="col-xs-4 singup">
-				<form action="${path}/memberInsertProc.do">
+				<form action="${path}/memberProc.do">
 					<div class="form-group">
-						<label for="id">ID:</label>
+						<label class="labelfont" for="id">아이디:</label>
 						<input type="text" class="form-control" id="id" name="id">
 					</div>
 					<div class="form-group">
-						<label for="pwd">Password:</label>
+						<label class="labelfont" for="pwd">비밀번호:</label>
 						<input type="password" class="form-control" id="pwd" name="pwd">
 					</div>
 					<div class="form-group">
-						<label for="id">Confirm Password:</label>
-						<input type="password" class="form-control" id="id" name="id">
+						<label class="labelfont" for="cpwd">비밀번호 확인:</label>
+						<input type="password" class="form-control" id="cpwd" name="cpwd">
 					</div>
 					<div class="form-group">
-						<label for="pwd">name:</label>
-						<input type="text" class="form-control" id="pwd" name="pwd">
+						<label class="labelfont" for="name">이름:</label>
+						<input type="text" class="form-control" id="name" name="name">
 					</div>
 					<div class="form-group">
-						<label for="id">the date of one’s birth:</label>
-						<input type="text" class="form-control" id="id" name="id">
+						<label class="labelfont" for="birth">생년월일:</label>
+						<input type="text" class="form-control" id="birth" name="birth">
 					</div>
 					<div class="form-group">
-						<label for="pwd">Gender:</label>
-						<input type="text" class="form-control" id="pwd" name="pwd">
+						<label class="labelfont" for="gender">성별:</label>
+						<input type="text" class="form-control" id="gender" name="gender">
 					</div>
 					<div class="form-group">
-						<label for="id">Phone number:</label>
-						<input type="text" class="form-control" id="id" name="id">
+						<label class="labelfont" for="pnumber">전화번호:</label>
+						<input type="text" class="form-control" id="pnumber" name="pnumber">
 					</div>
 					<div class="form-group">
-						<label for="pwd">E-mail:</label>
-						<input type="text" class="form-control" id="pwd" name="pwd">
+						<label class="labelfont" for="mail">E-mail:</label>
+						<input type="text" class="form-control" id="mail" name="mail">
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
+					<div class="buttondiv">
+						<button type="submit" class="btn btn-default">Submit</button>
+					</div>
 				</form>
 			</div>
 			<div class="col-xs-4 singup">

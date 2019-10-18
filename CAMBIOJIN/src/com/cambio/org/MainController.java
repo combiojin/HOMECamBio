@@ -39,9 +39,7 @@ public class MainController extends HttpServlet {
 		else if(cmd.equals("/memberProc.do")) {
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
-		else if(cmd.equals("/memberProc.do")) {
-			rd = request.getRequestDispatcher("/Member/member.jsp");
-		}
+	
 		rd.forward(request, response);
 	}
 
