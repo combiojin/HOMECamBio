@@ -46,4 +46,32 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	public void memberlist(HttpServletRequest request) {
+		try {
+			List<MemberDTO> list = new ArrayList<MemberDTO>();
+			Connection conn = ConnectionPool.getConnection();	//context.xml 에 DB연결
+			PreparedStatement pstmt = conn.prepareStatement(" select * from member1 ");
+		
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				list.add(
+					new MemberDTO(
+						rs.getString("id"), 
+						rs.getString("pwd"), 
+						rs.getString("cpwd"), 
+						rs.getString("name"), 
+						rs.getString("birth"), 
+						rs.getString("gender"), 
+						rs.getString("pnumber"), 
+						rs.getString("mail") 
+					)
+				);
+			}
+			request.setAttribute("myList", list);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
 }

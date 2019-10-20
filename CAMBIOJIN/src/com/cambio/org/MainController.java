@@ -29,7 +29,7 @@ public class MainController extends HttpServlet {
 		String cmd = reqURI.substring(contextPath.length());
 
 		if( cmd.equals("/index.do")) {
-			rd = request.getRequestDispatcher("index.jsp");
+			rd = request.getRequestDispatcher("/index.jsp");
 		}
 		else if(cmd.equals("/login.do")) {
 			rd = request.getRequestDispatcher("/Login/login.jsp");
@@ -39,7 +39,11 @@ public class MainController extends HttpServlet {
 		}
 		else if(cmd.equals("/singupProc.do")) {
 			dm.memberinsert(request);
-			rd = request.getRequestDispatcher("index.jsp");
+			rd = request.getRequestDispatcher("/index.jsp");
+		}
+		else if(cmd.equals("/member.do")) {
+			dm.memberlist(request);
+			rd = request.getRequestDispatcher("Member/member.jsp");
 		}
 		else if(cmd.equals("/memberForm.do")) {
 			rd = request.getRequestDispatcher("/Member/memberForm.jsp");
