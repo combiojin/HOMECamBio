@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cambio.org.board.BoardDAO;
 import com.cambio.org.member.MemberDAO;
 import com.cambio.org.member.MemberDTO;
 
@@ -16,6 +17,7 @@ import com.cambio.org.member.MemberDTO;
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberDAO dm = MemberDAO.getInstance();
+	private BoardDAO db = BoardDAO.getInstance();
 
     public MainController() {
         super();
@@ -43,7 +45,7 @@ public class MainController extends HttpServlet {
 		}
 		else if(cmd.equals("/member.do")) {
 			dm.memberlist(request);
-			rd = request.getRequestDispatcher("Member/member.jsp");
+			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
 		else if(cmd.equals("/memberForm.do")) {
 			rd = request.getRequestDispatcher("/Member/memberForm.jsp");
@@ -51,7 +53,20 @@ public class MainController extends HttpServlet {
 		else if(cmd.equals("/memberProc.do")) {
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
-	
+		else if(cmd.equals("/board.do")) {
+			db.boardlist(request);
+			rd = request.getRequestDispatcher("/Board/board.jsp");
+		}
+		else if(cmd.equals("/boardForm.do")) {
+			rd = request.getRequestDispatcher("/Board/boardForm.jsp");
+		}
+		else if(cmd.equals("/boardProc.do")) {
+			rd = request.getRequestDispatcher("/Board/board.jsp");
+		}
+		else {
+			rd = request.getRequestDispatcher("/Error.jsp");
+		}
+				
 		rd.forward(request, response);
 	}
 

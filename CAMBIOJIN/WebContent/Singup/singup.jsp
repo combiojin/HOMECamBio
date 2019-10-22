@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="/head.jsp"></jsp:include>
+<%@ include file="/head.jsp" %>
 </head>
 <body>
 	<div class="container">
@@ -42,14 +42,14 @@
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="pnumber">전화번호:</label> <input
-							type="text" class="form-control" id="pnumber" name="pnumber">
+							type="text" class="form-control" id="punmber" name="punmber">
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="mail">E-mail:</label> <input
 							type="text" class="form-control" id="mail" name="mail">
 					</div>
 					<div class="buttondiv">
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-default">회원가입</button>
 					</div>
 				</form>
 			</div>

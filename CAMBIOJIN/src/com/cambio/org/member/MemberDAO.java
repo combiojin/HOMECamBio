@@ -25,27 +25,29 @@ public class MemberDAO {
 		String name = request.getParameter("name");
 		String birth = request.getParameter("birth");
 		String gender = request.getParameter("gender");
-		String pnumber = request.getParameter("pnumber");
+		String punmber = request.getParameter("punmber");
 		String mail = request.getParameter("mail");
 		
 		try {
 			Connection conn = ConnectionPool.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(" insert into member1 " + 
-					" (id,pw,cpwd,name,birth,gender,pnumber,mail) " + 
-					" values(?,?,?,?,?,?,?,?) ");
+															" (id,pwd,cpwd,name,birth,gender,punmber,mail) " + 
+															" values(?,?,?,?,?,?,?,?) ");
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			pstmt.setString(3, cpwd);
 			pstmt.setString(4, name);
 			pstmt.setString(5, birth);
 			pstmt.setString(6, gender);
-			pstmt.setString(7, pnumber);
+			pstmt.setString(7, punmber);
 			pstmt.setString(8, mail);
 			pstmt.executeUpdate();
-		} catch (Exception e) {
+			
+			} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public void memberlist(HttpServletRequest request) {
 		try {
 			List<MemberDTO> list = new ArrayList<MemberDTO>();
@@ -63,7 +65,7 @@ public class MemberDAO {
 						rs.getString("name"), 
 						rs.getString("birth"), 
 						rs.getString("gender"), 
-						rs.getString("pnumber"), 
+						rs.getString("punmber"), 
 						rs.getString("mail") 
 					)
 				);
