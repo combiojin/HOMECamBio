@@ -5,7 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="/head.jsp"></jsp:include>
+<%@ include file="/head.jsp" %>
+<%
+	Cookie[] cks = request.getCookies();
+	String id = "";
+	String ck = "";
+	if (cks != null) {
+		for (int i = 0; i < cks.length; i++) {
+			if (cks[i].getName().equals("idsave")) {
+				id = cks[i].getValue();
+				if (!id.equals("")) {
+					ck = "checked";
+				}
+			}
+		}
+	}
+%>
 </head>
 <body>
 	<div class="container">
@@ -15,17 +30,17 @@
 			<div class="col-xs-4">
 			</div>
 			<div class="col-xs-4">
-				<form action="${path}/memberProc.do">
+				<form action="${path}/loginProc.do">
 					<div class="form-group">
 						<label class="labelfont" for="id">아이디:</label>
-						<input type="text" class="form-control" id="id" name="id">
+						<input type="text" class="form-control" id="id" name="id" value="<%=id%>">
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="pwd">비밀번호:</label>
 						<input type="password" class="form-control" id="pwd" name="pwd">
 					</div>
 					<div class="checkbox">
-						<label><input type="checkbox" name="save"> 아이디저장 </label>
+						<label><input type="checkbox" name="save" value="true" <%=ck%>> 아이디저장 </label>
 					</div>
 					<div class="buttondiv">
 						<button type="submit" class="btn btn-default">로그인</button>

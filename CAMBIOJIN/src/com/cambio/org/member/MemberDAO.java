@@ -1,8 +1,10 @@
 package com.cambio.org.member;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,28 @@ public class MemberDAO {
 	private static MemberDAO md = new MemberDAO();
 	public static MemberDAO getInstance() {
 		return md;
+	}
+	
+	public boolean checkLogin(HttpServletRequest request, String id, String pwd) {
+		boolean logincheck = true;
+
+		try {
+			Connection conn = ConnectionPool.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(" select * from member1 where id=? and pwd = ? ");
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				logincheck = true;
+			} else {
+				logincheck = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return logincheck;
 	}
 
 	//member insert

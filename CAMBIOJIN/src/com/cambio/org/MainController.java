@@ -36,6 +36,12 @@ public class MainController extends HttpServlet {
 		else if(cmd.equals("/login.do")) {
 			rd = request.getRequestDispatcher("/Login/login.jsp");
 		}
+		else if(cmd.equals("/loginProc.do")) {
+			String id = request.getParameter("id");
+			String pwd = request.getParameter("pwd");
+			dm.checkLogin(request, id, pwd);
+			rd = request.getRequestDispatcher("/Login/loginProc.jsp");
+		}
 		else if(cmd.equals("/singup.do")) {
 			rd = request.getRequestDispatcher("/Singup/singup.jsp");
 		}
