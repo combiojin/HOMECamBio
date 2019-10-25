@@ -53,11 +53,15 @@ public class MainController extends HttpServlet {
 			dm.memberlist(request);
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
-		else if(cmd.equals("/memberForm.do")) {
-			rd = request.getRequestDispatcher("/Member/memberForm.jsp");
-		}
 		else if(cmd.equals("/memberProc.do")) {
 			rd = request.getRequestDispatcher("/Member/member.jsp");
+		}
+		else if(cmd.equals("/memberMypage.do")) {
+			rd = request.getRequestDispatcher("/Member/memberMypage.jsp");
+		}
+		else if(cmd.equals("/memberList.do")) {
+			dm.memberlist(request);
+			rd = request.getRequestDispatcher("/Member/memberList.jsp");
 		}
 		else if(cmd.equals("/board.do")) {
 			db.boardlist(request);
