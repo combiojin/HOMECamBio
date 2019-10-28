@@ -16,6 +16,7 @@
 				<table class="table table-dark">
 					<thead>
 					    <tr>
+					      <th scope="col">번호</th>
 					      <th scope="col">아이디</th>
 					      <th scope="col">이름</th>
 					      <th scope="col">생년월일</th>
@@ -32,7 +33,8 @@
 					<c:forEach items="${myList}" var="i">
 						<tbody>
 							<tr>
-								<th scope="row">${i.id}</th>
+								<th scope="row">${i.num}</th>
+								<td>${i.id}</td>
 								<td>${i.name}</td>
 								<td>${i.birth}</td>
 								<td>${i.gender}</td>
@@ -42,6 +44,14 @@
 						</tbody>	
 					</c:forEach>
 				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4">
+			</div>
+			<div class="col-xs-4">
+			</div>
+			<div class="col-xs-4">
 			</div>
 		</div>
 		<!-- 발 -->
