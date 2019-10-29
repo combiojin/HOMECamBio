@@ -1,3 +1,4 @@
+<%@page import="com.cambio.org.member.MemberDTO"%>
 <%@page import="com.cambio.org.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,11 +16,11 @@
 		<div class="row rowpd">	
 		<div class="col-xs-4 singup"></div>
 			<div class="col-xs-4 singup">
-				<form action="${path}/singupProc.do">
+				<form action="${path}/index.do">
 					<%
 						String id = request.getParameter("id");
 						String pwd = request.getParameter("pwd");
-
+						
 						String checkvalue = request.getParameter("idsave");
 				
 						if (checkvalue != null) {
@@ -35,6 +36,7 @@
 
 						MemberDAO md = MemberDAO.getInstance();
 						boolean result = md.checkLogin(request, id, pwd);
+						
 
 						if (id == null)
 							out.println("아이디를 입력하세요.");
@@ -44,16 +46,34 @@
 						if (result == true) {
 							session.setAttribute("login", "sce");
 							session.setAttribute("id", id);
-												
+																
 						}
 								
 						String loginId = (String) session.getAttribute("id");
 						
 						if(loginId.equals("admin"))
 						{
-							out.println("<h3>관리자 계정으로 로그인 하였습니다.</h3> <h3>확인 버튼 클릭시 메인페이지로 이동합니다.</h3><br>");
+					%>
+						<div class="form-group">
+							<h4 class="center">관리자 계정으로 로그인 하였습니다.<br><br>
+								확인 버튼 클릭시 메인페이지로 이동합니다.
+							</h4>
+						</div>
+						<div class="buttondiv">
+							<button type="submit" class="btn btn-default">확인</button>
+						</div>
+					<%		
 						}else{
-							out.println("<h3>로그인에 성공하였습니다.</h3> <h3>확인 버튼 클릭시 메인페이지로 이동합니다.</h3><br>");
+					%>
+						<div class="form-group">
+							<h4 class="center">로그인 성공 하였습니다.<br><br>
+								확인 버튼 클릭시 메인페이지로 이동합니다.
+							</h4>
+						</div>
+						<div class="buttondiv">
+							<button type="submit" class="btn btn-default">확인</button>
+						</div>
+					<%		
 						}
 					%>
 				</form>	

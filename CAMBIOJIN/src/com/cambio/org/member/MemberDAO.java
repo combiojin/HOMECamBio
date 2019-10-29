@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.cambio.org.member.*;
 import com.mysql.cj.Session;
@@ -34,6 +35,19 @@ public class MemberDAO {
 
 			if (rs.next()) {
 				logincheck = true;
+				MemberDTO mdt = new MemberDTO();
+				mdt.setNum(rs.getInt("num"));
+				mdt.setId(rs.getString("id"));
+				mdt.setPwd(rs.getString("pwd"));
+				mdt.setCpwd(rs.getString("cpwd"));
+				mdt.setName(rs.getString("name"));
+				mdt.setBirth(rs.getString("birth"));
+				mdt.setGender(rs.getString("gender"));
+				mdt.setPunmber(rs.getString("punmber"));
+				mdt.setMail(rs.getString("mail"));
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("mdt", mdt);
 			} else {
 				logincheck = false;
 			}
@@ -105,20 +119,55 @@ public class MemberDAO {
 	}
 
 	public void mypageMember(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
 		try {
-			List<MemberDTO> list = new ArrayList<MemberDTO>();
-			Connection conn = ConnectionPool.getConnection(); // context.xml 에 DB연결
-			PreparedStatement pstmt = conn.prepareStatement(" SELECT * FROM member1 order by num desc ");
-
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				list.add(new MemberDTO(rs.getInt("num"), rs.getString("id"), rs.getString("pwd"), rs.getString("cpwd"),
-						rs.getString("name"), rs.getString("birth"), rs.getString("gender"), rs.getString("punmber"),
-						rs.getString("mail")));
+			conn = ConnectionPool.getConnection();
+			pstmt = conn.prepareStatement(" select * from member1 where id = ? ");
+			pstmt.setString(1, id);
+				
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				MemberDTO md = new MemberDTO();
+				md.setNum(rs.getInt("num"));
+				md.setId(rs.getString("id"));
+				md.setPwd(rs.getString("pwd"));
+				md.setCpwd(rs.getString("cpwd"));
+				md.setName(rs.getString("name"));
+				md.setBirth(rs.getString("birth"));
+				md.setGender(rs.getString("gender"));
+				md.setPunmber(rs.getString("punmber"));
+				md.setMail(rs.getString("mail"));
+				
+				request.setAttribute("mpg", md);
 			}
-			request.setAttribute("mypage", list);
-
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}	
+	//mypage update
+	public void mypageUpdate(HttpServletRequest request) {
+			String id = request.getParameter("id");
+			String pwd = request.getParameter("pwd");
+			String cpwd = request.getParameter("cpwd");
+			String punmber = request.getParameter("punmber");
+			String mail = request.getParameter("mail");
+		try {
+			Connection conn = ConnectionPool.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("update member1 " + 
+															" set pwd =?, cpwd= ?, punmber=?, mail=? " + 
+															" where id =? ");
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, cpwd);
+			pstmt.setString(3, punmber);
+			pstmt.setString(4, mail);
+			pstmt.setString(5, id);
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

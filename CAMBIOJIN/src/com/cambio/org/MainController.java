@@ -42,6 +42,9 @@ public class MainController extends HttpServlet {
 			dm.checkLogin(request, id, pwd);
 			rd = request.getRequestDispatcher("/Login/loginProc.jsp");
 		}
+		else if(cmd.equals("/logOut.do")) {
+			rd = request.getRequestDispatcher("/Login/logOut.jsp");
+		}
 		else if(cmd.equals("/singup.do")) {
 			rd = request.getRequestDispatcher("/Singup/singup.jsp");
 		}
@@ -57,11 +60,13 @@ public class MainController extends HttpServlet {
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
 		else if(cmd.equals("/memberMypage.do")) {
-
+			dm.mypageMember(request);
 			rd = request.getRequestDispatcher("/Member/memberMypage.jsp");
 		}
 		else if(cmd.equals("/memberMypageProc.do")) {
-			rd = request.getRequestDispatcher("/Member/memberMypageProc.jsp");
+			dm.mypageUpdate(request);
+			dm.mypageMember(request);
+			rd = request.getRequestDispatcher("/Member/memberMypage.jsp");
 		}
 		else if(cmd.equals("/memberList.do")) {
 			dm.memberlist(request);

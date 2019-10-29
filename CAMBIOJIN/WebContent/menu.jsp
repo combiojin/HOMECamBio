@@ -12,10 +12,10 @@
 		<ul class="fl-r">
 		<% if (login != null && login.equals("sce") && (loginId.equals("admin") != login.equals("sce")) ){ %>
 			<li><a href="memberMypage.do">내정보</a></li>
-			<li><a href="logout.do">로그아웃</a></li>
+			<li><a href="logOut.do">로그아웃</a></li>
 		<%} else if (login != null && loginId.equals("admin")){%>
 			<li><a href="memberList.do">회원정보</a></li>
-			<li><a href="logout.do">로그아웃</a></li>
+			<li><a href="logOut.do">로그아웃</a></li>
 		<%} else { %>		
 			<li><a href="singup.do">회원가입</a></li>
 			<li><a href="login.do">로그인</a></li>
