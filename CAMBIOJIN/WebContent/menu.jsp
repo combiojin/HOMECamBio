@@ -14,6 +14,7 @@
 			<li><a href="memberMypage.do">내정보</a></li>
 			<li><a href="logOut.do">로그아웃</a></li>
 		<%} else if (login != null && loginId.equals("admin")){%>
+			<li><a href="memberMypage.do">내정보</a></li>
 			<li><a href="memberList.do">회원정보</a></li>
 			<li><a href="logOut.do">로그아웃</a></li>
 		<%} else { %>		

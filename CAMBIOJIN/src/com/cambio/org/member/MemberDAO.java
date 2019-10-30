@@ -120,17 +120,13 @@ public class MemberDAO {
 
 	public void mypageMember(HttpServletRequest request) {
 		String id = request.getParameter("id");
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
+	
 		try {
-			conn = ConnectionPool.getConnection();
-			pstmt = conn.prepareStatement(" select * from member1 where id = ? ");
+			Connection conn = ConnectionPool.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(" select * from member1 where id = ? ");
 			pstmt.setString(1, id);
 				
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				MemberDTO md = new MemberDTO();
 				md.setNum(rs.getInt("num"));
@@ -171,5 +167,22 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+
+	public boolean mypageDelete(HttpServletRequest request) {
+		String id = request.getParameter("id");
+
+		try {
+			Connection conn = ConnectionPool.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(" delete from member1 " + " where id=? ");
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+									
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} 
+		return true;
 	}
 }

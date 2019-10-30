@@ -30,9 +30,11 @@ public class MainController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String cmd = reqURI.substring(contextPath.length());
 
+		//홈
 		if( cmd.equals("/index.do")) {
 			rd = request.getRequestDispatcher("/index.jsp");
 		}
+		//로그인
 		else if(cmd.equals("/login.do")) {
 			rd = request.getRequestDispatcher("/Login/login.jsp");
 		}
@@ -42,9 +44,11 @@ public class MainController extends HttpServlet {
 			dm.checkLogin(request, id, pwd);
 			rd = request.getRequestDispatcher("/Login/loginProc.jsp");
 		}
+		//로그아웃
 		else if(cmd.equals("/logOut.do")) {
 			rd = request.getRequestDispatcher("/Login/logOut.jsp");
 		}
+		//회원가입
 		else if(cmd.equals("/singup.do")) {
 			rd = request.getRequestDispatcher("/Singup/singup.jsp");
 		}
@@ -52,6 +56,7 @@ public class MainController extends HttpServlet {
 			dm.memberinsert(request);
 			rd = request.getRequestDispatcher("/index.jsp");
 		}
+		//회원목록
 		else if(cmd.equals("/member.do")) {
 			dm.memberlist(request);
 			rd = request.getRequestDispatcher("/Member/member.jsp");
@@ -59,10 +64,12 @@ public class MainController extends HttpServlet {
 		else if(cmd.equals("/memberProc.do")) {
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
+		//마이페이지
 		else if(cmd.equals("/memberMypage.do")) {
 			dm.mypageMember(request);
 			rd = request.getRequestDispatcher("/Member/memberMypage.jsp");
 		}
+		//마이페이지 수정
 		else if(cmd.equals("/memberMypageProc.do")) {
 			dm.mypageUpdate(request);
 			dm.mypageMember(request);
@@ -72,6 +79,12 @@ public class MainController extends HttpServlet {
 			dm.memberlist(request);
 			rd = request.getRequestDispatcher("/Member/memberList.jsp");
 		}
+		//회원탈퇴
+		else if(cmd.equals("/memberDelete.do")) {
+			dm.mypageDelete(request);
+			rd = request.getRequestDispatcher("/Member/memberDelete.jsp");
+		}
+		//게시판
 		else if(cmd.equals("/board.do")) {
 			db.boardlist(request);
 			rd = request.getRequestDispatcher("/Board/board.jsp");
@@ -82,6 +95,7 @@ public class MainController extends HttpServlet {
 		else if(cmd.equals("/boardProc.do")) {
 			rd = request.getRequestDispatcher("/Board/board.jsp");
 		}
+		//에러페이지
 		else {
 			rd = request.getRequestDispatcher("/Error.jsp");
 		}

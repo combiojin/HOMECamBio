@@ -47,11 +47,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-4">
-			</div>
-			<div class="col-xs-4">
-			</div>
-			<div class="col-xs-4">
+			<div class="col-xs-12">
+				<ul class="pagination width50 fl-l">
+					<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				<c:forEach begin="1" end="${membercnt}" var="i">
+					<li class="page-item"><a class="page-link" href="${path}/member.do?pageNum=${i}">${i}</a></li>
+				</c:forEach>
+					<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul>
 			</div>
 		</div>
 		<!-- 발 -->

@@ -41,6 +41,21 @@
 				</table>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<ul class="pagination width50 fl-l">
+					<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+				<c:forEach begin="1" end="${membercnt}" var="i">
+					<li class="page-item"><a class="page-link" href="${path}/member.do?pageNum=${i}">${i}</a></li>
+				</c:forEach>
+					<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul>
+				<div class="width50 fl-r" style="margin: 20px 0;">
+					<button type="button" class="btn btn-default" onclick="location.href='memberInsert.do';">글작성</button>
+					<button type="button" class="btn btn-default" onclick="doDelete();">글삭제</button>
+				</div>	
+			</div>
+		</div>
 		<!-- 발 -->
 		<div class="row">
 			<div class="col text-center">

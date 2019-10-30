@@ -56,3 +56,12 @@
    	.center {
    		text-align: center;
    	}
+   	.buttonspan {
+   		display: inline-block;
+   	}
+   	.width50 {
+   		width: 50%;
+   	}
+   	.buttonmargin {
+   		margin: 20px 0;
+   	}
