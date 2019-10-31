@@ -10,24 +10,12 @@
 	$(document).ready(function() {
 		$(".mytr").css("cursor", "pointer");
 
-		$(".inputbox").click(function(e) {
-			var seq = $(this).attr("id");
-			$("#" + seq).attr("checked", "true");
-			//			e.preventDefault(); 기본이벤트제거
-			e.stopPropagation(); //부모태그 이벤트제거
-		});
-
-		$(".mytr").on('click', function(e) {
-			var seq = $(this).attr("seq");
-			location.href = "memberUpdate.do?seq=" + seq;
-		});
-
 	});
 
 	function doDelete() {
 		var test = confirm("삭제 하시겠습니까?");
 		if (test) {
-			$("#myform").attr("action", "memberDelete.do");
+			$("#myform").attr("action", "memberlistgDelete.do");
 			$("#myform").submit();
 		}
 	}
@@ -61,7 +49,7 @@
 						<tbody>
 							<tr class="mytr" seq="${i.num}">
 								<th scope="row">${i.num}</th>
-								<td>${i.id}</td>
+								<td><a href="memberList.do">${i.id}</a></td>
 								<td>${i.name}</td>
 								<td>${i.birth}</td>
 								<td>${i.gender}</td>
@@ -85,7 +73,7 @@
 				</c:forEach>
 					<li class="page-item"><a class="page-link" href="#">Next</a></li>
 				</ul>
-				<div class="width50 fl-r" style="margin: 20px 0;">
+				<div class="width50 fl-r" style="margin: 20px 0;  text-align: right;">
 					<button type="button" class="btn btn-default" onclick="location.href='singup.do';">회원등록</button>
 					<button type="button" class="btn btn-default" onclick="doDelete();">회원삭제</button>
 				</div>	

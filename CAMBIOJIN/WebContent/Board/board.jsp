@@ -50,7 +50,7 @@
 				</c:forEach>
 					<li class="page-item"><a class="page-link" href="#">Next</a></li>
 				</ul>
-				<div class="width50 fl-r" style="margin: 20px 0;">
+				<div class="width50 fl-r" style="margin: 20px 0; text-align: right;">
 					<button type="button" class="btn btn-default" onclick="location.href='memberInsert.do';">글작성</button>
 					<button type="button" class="btn btn-default" onclick="doDelete();">글삭제</button>
 				</div>	

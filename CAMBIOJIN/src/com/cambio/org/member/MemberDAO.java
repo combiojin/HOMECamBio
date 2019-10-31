@@ -88,8 +88,45 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void memberlistSelect(HttpServletRequest request) {
+		String number = request.getParameter("pageNum");
+				
+		int num = number == null ? 1: Integer.parseInt(number);
+
+		num = 10*(num-1);
+		
+		try {
+			List<MemberDTO> list = new ArrayList<MemberDTO>();
+			Connection conn = ConnectionPool.getConnection(); // context.xml 에 DB연결
+			PreparedStatement pstmt = conn.prepareStatement(" select * from member1 where rownum >= ? rownum <=10 ");
+			
+			pstmt.setInt(1, num);
+		
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(
+					new MemberDTO(
+						rs.getInt("num"), 
+						rs.getString("id"), 
+						rs.getString("pwd"), 
+						rs.getString("cpwd"),
+						rs.getString("name"), 
+						rs.getString("birth"), 
+						rs.getString("gender"), 
+						rs.getString("punmber"),
+						rs.getString("mail")));
+			}
+			request.setAttribute("myList", list);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void memberlist(HttpServletRequest request) {
+	
 		try {
 			List<MemberDTO> list = new ArrayList<MemberDTO>();
 			Connection conn = ConnectionPool.getConnection(); // context.xml 에 DB연결
@@ -103,15 +140,6 @@ public class MemberDAO {
 						rs.getString("mail")));
 			}
 			request.setAttribute("myList", list);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void memberUpdate(HttpServletRequest request) {
-
-		try {
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,10 +197,7 @@ public class MemberDAO {
 		}
 	}
 	
-
-	public boolean mypageDelete(HttpServletRequest request) {
-		String id = request.getParameter("id");
-
+	public boolean mypageDelete(HttpServletRequest request, String id) {
 		try {
 			Connection conn = ConnectionPool.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(" delete from member1 " + " where id=? ");
@@ -184,5 +209,47 @@ public class MemberDAO {
 			return false;
 		} 
 		return true;
+	}
+	
+	public void cntmember(HttpServletRequest request) {
+		try {
+			int cnt = 0;
+			Connection conn = ConnectionPool.getConnection();	//context.xml 에 DB연결
+			PreparedStatement pstmt = conn.prepareStatement(" select count(num)  from member1 ");
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				cnt = rs.getInt(1);
+			
+			if(cnt%10 != 0 ) {
+				cnt = cnt / 10+1;
+			} else {
+				cnt = cnt / 10;				
+			}
+			
+			request.setAttribute("membercnt", cnt);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+	public void memberlistDelete(HttpServletRequest request, String[] seqs) {
+		
+		try {
+			String deleteseq = "";
+			for (int i = 0; i<seqs.length;i++) {
+				deleteseq += seqs[i]+",";
+			}
+			deleteseq = deleteseq.substring(0,deleteseq.length()-2);
+			
+			Connection conn = ConnectionPool.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(" delete from member1 " + 
+															" where num in ( "+deleteseq+" ) ");
+			
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

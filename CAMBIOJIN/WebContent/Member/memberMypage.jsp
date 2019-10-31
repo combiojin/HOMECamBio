@@ -35,7 +35,7 @@ function deleteCheck(){
 					<div class="form-group">
 						<label class="labelfont" for="id">아이디:</label> <input type="text"
 							class="form-control" id="id" name="id" value="${id}"
-							disabled="disabled">
+							readonly>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="pwd">비밀번호:</label> <input
@@ -50,17 +50,17 @@ function deleteCheck(){
 					<div class="form-group">
 						<label class="labelfont" for="name">이름:</label> <input type="text"
 							class="form-control" id="name" name="name" value="${sessionScope.mdt.name}"
-							disabled="disabled">
+							readonly>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="birth">생년월일:</label> <input
 							type="text" class="form-control" id="birth" name="birth"
-							value="${sessionScope.mdt.birth}" disabled="disabled">
+							value="${sessionScope.mdt.birth}" readonly>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="gender">성별:</label> <input
 							type="text" class="form-control" id="gender" name="gender"
-							value="${sessionScope.mdt.gender}" disabled="disabled">
+							value="${sessionScope.mdt.gender}" readonly>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="pnumber">전화번호:</label> <input

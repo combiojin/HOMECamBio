@@ -32,7 +32,7 @@
 					%>
 					<c:forEach items="${myList}" var="i">
 						<tbody>
-							<tr>
+							<tr class="mytr" num="${i.num}">
 								<th scope="row">${i.num}</th>
 								<td>${i.id}</td>
 								<td>${i.name}</td>

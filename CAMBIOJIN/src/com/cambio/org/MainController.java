@@ -58,7 +58,8 @@ public class MainController extends HttpServlet {
 		}
 		//회원목록
 		else if(cmd.equals("/member.do")) {
-			dm.memberlist(request);
+			dm.memberlistSelect(request);
+			dm.cntmember(request);
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
 		else if(cmd.equals("/memberProc.do")) {
@@ -66,23 +67,31 @@ public class MainController extends HttpServlet {
 		}
 		//마이페이지
 		else if(cmd.equals("/memberMypage.do")) {
-			dm.mypageMember(request);
 			rd = request.getRequestDispatcher("/Member/memberMypage.jsp");
 		}
 		//마이페이지 수정
 		else if(cmd.equals("/memberMypageProc.do")) {
 			dm.mypageUpdate(request);
-			dm.mypageMember(request);
-			rd = request.getRequestDispatcher("/Member/memberMypage.jsp");
-		}
-		else if(cmd.equals("/memberList.do")) {
 			dm.memberlist(request);
+			rd = request.getRequestDispatcher("/Member/memberMypageProc.jsp");
+		}
+		//관리자 계정 회원정보 수정
+		else if(cmd.equals("/memberList.do")) {
+			dm.memberlistSelect(request);
 			rd = request.getRequestDispatcher("/Member/memberList.jsp");
 		}
 		//회원탈퇴
 		else if(cmd.equals("/memberDelete.do")) {
-			dm.mypageDelete(request);
+			String id = request.getParameter("id");
+			dm.mypageDelete(request, id);
 			rd = request.getRequestDispatcher("/Member/memberDelete.jsp");
+		}
+		else if(cmd.equals("/memberlistgDelete.do")) {
+			String[] seqs = request.getParameterValues("seq");
+			dm.memberlistDelete(request, seqs );
+			dm.cntmember(request);
+			dm.memberlistSelect(request);
+			rd = request.getRequestDispatcher("/Member/memberList.do");
 		}
 		//게시판
 		else if(cmd.equals("/board.do")) {

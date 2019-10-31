@@ -46,7 +46,7 @@
 						if (result == true) {
 							session.setAttribute("login", "sce");
 							session.setAttribute("id", id);
-																
+									
 						}
 								
 						String loginId = (String) session.getAttribute("id");
