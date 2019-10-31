@@ -47,16 +47,16 @@
 					%>
 					<c:forEach items="${myList}" var="i">
 						<tbody>
-							<tr class="mytr" seq="${i.num}">
+							<tr class="mytr" num="${i.num}">
 								<th scope="row">${i.num}</th>
-								<td><a href="memberList.do">${i.id}</a></td>
+								<td><a href="memberListChange.do" style="color: black;">${i.id}</a></td>
 								<td>${i.name}</td>
 								<td>${i.birth}</td>
 								<td>${i.gender}</td>
 								<td>${i.punmber}</td>
 								<td>${i.mail}</td>
 								<th class="justfly-content-center text-center">
-								<input class="inputbox" id="check${i.num}" type="checkbox" name="seq" value="${i.num}">
+								<input class="inputbox" id="check${i.num}" type="checkbox" name="num" value="${i.num}">
 							</th>
 							</tr>
 						</tbody>	

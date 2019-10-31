@@ -59,7 +59,6 @@ public class MainController extends HttpServlet {
 		//회원목록
 		else if(cmd.equals("/member.do")) {
 			dm.memberlistSelect(request);
-			dm.cntmember(request);
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
 		else if(cmd.equals("/memberProc.do")) {
@@ -80,6 +79,15 @@ public class MainController extends HttpServlet {
 			dm.memberlistSelect(request);
 			rd = request.getRequestDispatcher("/Member/memberList.jsp");
 		}
+		else if(cmd.equals("/memberListChange.do")) {
+			rd = request.getRequestDispatcher("/Member/memberListChange.jsp");
+		}
+		else if(cmd.equals("/memberListChangeProc.do")) {
+			dm.memberlist(request);
+			dm.mypageUpdate(request);
+			dm.memberlistSelect(request);
+			rd = request.getRequestDispatcher("/Member/memberList.jsp");
+		}
 		//회원탈퇴
 		else if(cmd.equals("/memberDelete.do")) {
 			String id = request.getParameter("id");
@@ -87,9 +95,7 @@ public class MainController extends HttpServlet {
 			rd = request.getRequestDispatcher("/Member/memberDelete.jsp");
 		}
 		else if(cmd.equals("/memberlistgDelete.do")) {
-			String[] seqs = request.getParameterValues("seq");
-			dm.memberlistDelete(request, seqs );
-			dm.cntmember(request);
+			String[] nums = request.getParameterValues("num");
 			dm.memberlistSelect(request);
 			rd = request.getRequestDispatcher("/Member/memberList.do");
 		}

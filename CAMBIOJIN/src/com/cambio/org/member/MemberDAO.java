@@ -99,10 +99,12 @@ public class MemberDAO {
 		try {
 			List<MemberDTO> list = new ArrayList<MemberDTO>();
 			Connection conn = ConnectionPool.getConnection(); // context.xml 에 DB연결
-			PreparedStatement pstmt = conn.prepareStatement(" select * from member1 where rownum >= ? rownum <=10 ");
-			
-			pstmt.setInt(1, num);
-		
+			PreparedStatement pstmt = conn.prepareStatement(" SELECT * FROM ( " + 
+															"    SELECT p.*, ROW_NUMBER() OVER(ORDER BY num DESC) AS RNUM " + 
+															"    FROM member1 p " + 
+															" ) " + 
+															"WHERE RNUM BETWEEN 1 AND 10 ");
+					
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -233,18 +235,18 @@ public class MemberDAO {
 			e.printStackTrace();
 		}	
 	}
-	public void memberlistDelete(HttpServletRequest request, String[] seqs) {
+	public void memberlistDelete(HttpServletRequest request, String[] nums) {
 		
 		try {
-			String deleteseq = "";
-			for (int i = 0; i<seqs.length;i++) {
-				deleteseq += seqs[i]+",";
+			String deletenum = "";
+			for (int i = 0; i<nums.length;i++) {
+				deletenum += nums[i]+",";
 			}
-			deleteseq = deleteseq.substring(0,deleteseq.length()-2);
+			deletenum = deletenum.substring(0,deletenum.length()-2);
 			
 			Connection conn = ConnectionPool.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(" delete from member1 " + 
-															" where num in ( "+deleteseq+" ) ");
+															" where num in ( "+deletenum+" ) ");
 			
 			pstmt.executeUpdate();
 
