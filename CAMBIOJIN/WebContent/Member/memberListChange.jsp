@@ -9,10 +9,6 @@
 </head>
 <body>
 <%@ include file="/head.jsp"%>
-<%
-	MemberDAO md = new MemberDAO();
-	String id = request.getParameter("id");
-%>
 </head>
 <body>
 	<div class="container">
@@ -24,45 +20,46 @@
 			<div class="col-xs-6 singup">
 				<form action="${path}/memberListChangeProc.do">
 					<h3>관리자 권한으로 전부 수정 가능.</h3>
+					<input type="hidden" name="seq" value="${param.num}">
 					<div class="form-group">
 						<label class="labelfont" for="id">아이디:</label> <input type="text"
-							class="form-control" id="id" name="id" value="${sessionScope.mdt.id}"
+							class="form-control" id="id" name="id" value="${mpg.id}"
 							>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="pwd">비밀번호:</label> <input
-							type="password" class="form-control" id="pwd" name="pwd" value="${sessionScope.mdt.pwd}"
+							type="password" class="form-control" id="pwd" name="pwd" value="${mpg.pwd}"
 							>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="cpwd">비밀번호 확인:</label> <input
-							type="password" class="form-control" id="cpwd" name="cpwd" value="${sessionScope.mdt.cpwd}"
+							type="password" class="form-control" id="cpwd" name="cpwd" value="${mpg.cpwd}"
 							>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="name">이름:</label> <input type="text"
-							class="form-control" id="name" name="name" value="${sessionScope.mdt.name}"
+							class="form-control" id="name" name="name" value="${mpg.name}"
 							>
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="birth">생년월일:</label> <input
 							type="text" class="form-control" id="birth" name="birth"
-							value="${sessionScope.mdt.birth}" >
+							value="${mpg.birth}" >
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="gender">성별:</label> <input
 							type="text" class="form-control" id="gender" name="gender"
-							value="${sessionScope.mdt.gender}" >
+							value="${mpg.gender}" >
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="pnumber">전화번호:</label> <input
 							type="text" class="form-control" id="punmber" name="punmber"
-							value="${sessionScope.mdt.punmber}">
+							value="${mpg.punmber}">
 					</div>
 					<div class="form-group">
 						<label class="labelfont" for="mail">E-mail:</label> <input
 							type="text" class="form-control" id="mail" name="mail"
-							value="${sessionScope.mdt.mail}">
+							value="${mpg.mail}">
 					</div>
 					<div class="buttondiv">
 						<button type="submit" class="btn btn-default buttonspan">수정</button>

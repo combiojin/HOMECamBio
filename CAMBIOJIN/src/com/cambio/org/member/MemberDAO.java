@@ -28,7 +28,7 @@ public class MemberDAO {
 
 		try {
 			Connection conn = ConnectionPool.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(" select * from member1 where id=? and pwd = ? ");
+			PreparedStatement pstmt = conn.prepareStatement(" select * from member where id=? and pwd = ? ");
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			ResultSet rs = pstmt.executeQuery();
@@ -72,8 +72,8 @@ public class MemberDAO {
 		try {
 			Connection conn = ConnectionPool.getConnection();
 			PreparedStatement pstmt = conn
-					.prepareStatement(" insert into member1 " + " (num,id,pwd,cpwd,name,birth,gender,punmber,mail) "
-							+ " values(memberseq.NEXTVAL,?,?,?,?,?,?,?,?) ");
+					.prepareStatement(" insert into member " + " (id,pwd,cpwd,name,birth,gender,punmber,mail) "
+							+ " values(?,?,?,?,?,?,?,?) ");
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			pstmt.setString(3, cpwd);
@@ -99,11 +99,11 @@ public class MemberDAO {
 		try {
 			List<MemberDTO> list = new ArrayList<MemberDTO>();
 			Connection conn = ConnectionPool.getConnection(); // context.xml 에 DB연결
-			PreparedStatement pstmt = conn.prepareStatement(" SELECT * FROM ( " + 
-															"    SELECT p.*, ROW_NUMBER() OVER(ORDER BY num DESC) AS RNUM " + 
-															"    FROM member1 p " + 
-															" ) " + 
-															"WHERE RNUM BETWEEN 1 AND 10 ");
+			PreparedStatement pstmt = conn.prepareStatement(" select * from member " + 
+																" order by num desc " + 
+																" limit ?,10 ");
+			
+			pstmt.setInt(1, num);
 					
 			ResultSet rs = pstmt.executeQuery();
 
@@ -132,7 +132,7 @@ public class MemberDAO {
 		try {
 			List<MemberDTO> list = new ArrayList<MemberDTO>();
 			Connection conn = ConnectionPool.getConnection(); // context.xml 에 DB연결
-			PreparedStatement pstmt = conn.prepareStatement(" SELECT * FROM member1 order by num desc ");
+			PreparedStatement pstmt = conn.prepareStatement(" SELECT * FROM member order by num desc ");
 
 			ResultSet rs = pstmt.executeQuery();
 
@@ -149,12 +149,12 @@ public class MemberDAO {
 	}
 
 	public void mypageMember(HttpServletRequest request) {
-		String id = request.getParameter("id");
+		String num = request.getParameter("num");
 	
 		try {
 			Connection conn = ConnectionPool.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(" select * from member1 where id = ? ");
-			pstmt.setString(1, id);
+			PreparedStatement pstmt = conn.prepareStatement(" select * from member where num = ? ");
+			pstmt.setString(1, num);
 				
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -185,7 +185,7 @@ public class MemberDAO {
 			String mail = request.getParameter("mail");
 		try {
 			Connection conn = ConnectionPool.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("update member1 " + 
+			PreparedStatement pstmt = conn.prepareStatement("update member " + 
 															" set pwd =?, cpwd= ?, punmber=?, mail=? " + 
 															" where id =? ");
 			pstmt.setString(1, pwd);
@@ -202,7 +202,7 @@ public class MemberDAO {
 	public boolean mypageDelete(HttpServletRequest request, String id) {
 		try {
 			Connection conn = ConnectionPool.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(" delete from member1 " + " where id=? ");
+			PreparedStatement pstmt = conn.prepareStatement(" delete from member " + " where id=? ");
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
 									
@@ -217,7 +217,7 @@ public class MemberDAO {
 		try {
 			int cnt = 0;
 			Connection conn = ConnectionPool.getConnection();	//context.xml 에 DB연결
-			PreparedStatement pstmt = conn.prepareStatement(" select count(num)  from member1 ");
+			PreparedStatement pstmt = conn.prepareStatement(" select count(num)  from member ");
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next())
@@ -245,7 +245,7 @@ public class MemberDAO {
 			deletenum = deletenum.substring(0,deletenum.length()-2);
 			
 			Connection conn = ConnectionPool.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(" delete from member1 " + 
+			PreparedStatement pstmt = conn.prepareStatement(" delete from member " + 
 															" where num in ( "+deletenum+" ) ");
 			
 			pstmt.executeUpdate();

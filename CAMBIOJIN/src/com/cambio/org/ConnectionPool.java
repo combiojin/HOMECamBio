@@ -17,7 +17,7 @@ public class ConnectionPool {
 		else {
 			try {
 				Context initContext = (Context) new InitialContext().lookup("java:comp/env");
-				DataSource ds = (DataSource) initContext.lookup("jdbc/orcl");
+				DataSource ds = (DataSource) initContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
 			}catch (Exception e) {
 				e.printStackTrace();

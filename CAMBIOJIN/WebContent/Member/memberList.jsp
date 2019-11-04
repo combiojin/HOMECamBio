@@ -15,7 +15,7 @@
 	function doDelete() {
 		var test = confirm("삭제 하시겠습니까?");
 		if (test) {
-			$("#myform").attr("action", "memberlistgDelete.do");
+			$("#myform").attr("action", "memberlistDelete.do");
 			$("#myform").submit();
 		}
 	}
@@ -27,6 +27,7 @@
 		<!-- 중간 -->
 		<div class="row"><!-- xs( xm md lg -->
 			<div class="col-xs-12">
+				<h4 class="text-center">회원 아이디 클릭시 회원 개인정보 수정 가능</h4>
 				<table class="table table-dark">
 					<thead>
 					    <tr>
@@ -69,7 +70,7 @@
 				<ul class="pagination width50 fl-l">
 					<li class="page-item"><a class="page-link" href="#">Previous</a></li>
 				<c:forEach begin="1" end="${membercnt}" var="i">
-					<li class="page-item"><a class="page-link" href="${path}/member.do?pageNum=${i}">${i}</a></li>
+					<li class="page-item"><a class="page-link" href="${path}/memberList.do?pageNum=${i}">${i}</a></li>
 				</c:forEach>
 					<li class="page-item"><a class="page-link" href="#">Next</a></li>
 				</ul>

@@ -59,6 +59,7 @@ public class MainController extends HttpServlet {
 		//회원목록
 		else if(cmd.equals("/member.do")) {
 			dm.memberlistSelect(request);
+			dm.cntmember(request);
 			rd = request.getRequestDispatcher("/Member/member.jsp");
 		}
 		else if(cmd.equals("/memberProc.do")) {
@@ -71,19 +72,19 @@ public class MainController extends HttpServlet {
 		//마이페이지 수정
 		else if(cmd.equals("/memberMypageProc.do")) {
 			dm.mypageUpdate(request);
-			dm.memberlist(request);
 			rd = request.getRequestDispatcher("/Member/memberMypageProc.jsp");
 		}
 		//관리자 계정 회원정보 수정
 		else if(cmd.equals("/memberList.do")) {
 			dm.memberlistSelect(request);
+			dm.cntmember(request);
 			rd = request.getRequestDispatcher("/Member/memberList.jsp");
 		}
 		else if(cmd.equals("/memberListChange.do")) {
 			rd = request.getRequestDispatcher("/Member/memberListChange.jsp");
 		}
 		else if(cmd.equals("/memberListChangeProc.do")) {
-			dm.memberlist(request);
+			dm.mypageMember(request);
 			dm.mypageUpdate(request);
 			dm.memberlistSelect(request);
 			rd = request.getRequestDispatcher("/Member/memberList.jsp");
@@ -96,19 +97,30 @@ public class MainController extends HttpServlet {
 		}
 		else if(cmd.equals("/memberlistgDelete.do")) {
 			String[] nums = request.getParameterValues("num");
+			System.out.println(nums);
+			dm.memberlistDelete(request, nums);
 			dm.memberlistSelect(request);
+			dm.cntmember(request);
 			rd = request.getRequestDispatcher("/Member/memberList.do");
 		}
 		//게시판
 		else if(cmd.equals("/board.do")) {
-			db.boardlist(request);
+			db.boardlistSelect(request);
+			db.cntboard(request);
 			rd = request.getRequestDispatcher("/Board/board.jsp");
 		}
-		else if(cmd.equals("/boardForm.do")) {
-			rd = request.getRequestDispatcher("/Board/boardForm.jsp");
+		else if(cmd.equals("/boardInsert.do")) {
+			rd = request.getRequestDispatcher("/Board/boardInsert.jsp");
 		}
-		else if(cmd.equals("/boardProc.do")) {
-			rd = request.getRequestDispatcher("/Board/board.jsp");
+		else if(cmd.equals("/boardInsertProc.do")) {
+			db.boardinsert(request);
+			db.boardlistSelect(request);
+			db.cntboard(request);
+			response.sendRedirect("board.do");
+			return;
+		}
+		else if(cmd.equals("/boardWriter.do.do")) {
+			rd = request.getRequestDispatcher("/Board/boardWriter.do.jsp");
 		}
 		//에러페이지
 		else {
