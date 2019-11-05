@@ -72,6 +72,7 @@ public class MainController extends HttpServlet {
 		//마이페이지 수정
 		else if(cmd.equals("/memberMypageProc.do")) {
 			dm.mypageUpdate(request);
+			dm.mypageMember(request);
 			rd = request.getRequestDispatcher("/Member/memberMypageProc.jsp");
 		}
 		//관리자 계정 회원정보 수정
@@ -81,6 +82,7 @@ public class MainController extends HttpServlet {
 			rd = request.getRequestDispatcher("/Member/memberList.jsp");
 		}
 		else if(cmd.equals("/memberListChange.do")) {
+			dm.mypageMember(request);
 			rd = request.getRequestDispatcher("/Member/memberListChange.jsp");
 		}
 		else if(cmd.equals("/memberListChangeProc.do")) {
@@ -95,13 +97,12 @@ public class MainController extends HttpServlet {
 			dm.mypageDelete(request, id);
 			rd = request.getRequestDispatcher("/Member/memberDelete.jsp");
 		}
-		else if(cmd.equals("/memberlistgDelete.do")) {
+		else if(cmd.equals("/memberlistDelete.do")) {
 			String[] nums = request.getParameterValues("num");
-			System.out.println(nums);
 			dm.memberlistDelete(request, nums);
 			dm.memberlistSelect(request);
 			dm.cntmember(request);
-			rd = request.getRequestDispatcher("/Member/memberList.do");
+			rd = request.getRequestDispatcher("/Member/memberList.jsp");
 		}
 		//게시판
 		else if(cmd.equals("/board.do")) {
@@ -119,8 +120,22 @@ public class MainController extends HttpServlet {
 			response.sendRedirect("board.do");
 			return;
 		}
-		else if(cmd.equals("/boardWriter.do.do")) {
-			rd = request.getRequestDispatcher("/Board/boardWriter.do.jsp");
+		else if(cmd.equals("/boardUpdate.do")) {
+			db.boardselectRow(request);
+			rd = request.getRequestDispatcher("/Board/boardUpdate.jsp");
+		}
+		else if(cmd.equals("/boardUpdateProc.do")) {
+			db.boardupdateRow(request);
+			db.boardlistSelect(request);
+			rd = request.getRequestDispatcher("/Board/board.jsp");
+		}
+		else if(cmd.equals("/boardDelete.do")) {
+			String[] nums = request.getParameterValues("num");
+			db.boardlistDelete(request, nums);
+			db.boardlistSelect(request);
+			db.cntboard(request);
+			response.sendRedirect("board.do");
+			return;
 		}
 		//에러페이지
 		else {

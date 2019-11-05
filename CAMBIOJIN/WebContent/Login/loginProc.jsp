@@ -33,50 +33,58 @@
 							cookie.setMaxAge(1 * 60 * 60 * 24);
 							response.addCookie(cookie);
 						}
-
+		
 						MemberDAO md = MemberDAO.getInstance();
 						boolean result = md.checkLogin(request, id, pwd);
-						
-
-						if (id == null)
-							out.println("아이디를 입력하세요.");
-						else if (pwd == null)
-							out.println("비밀번호를 입력하세요.");
-
+		
 						if (result == true) {
 							session.setAttribute("login", "sce");
-							session.setAttribute("id", id);
-									
+// 							session.setAttribute("id", id);
+							
 						}
-								
+						
 						String loginId = (String) session.getAttribute("id");
 						
-						if(loginId.equals("admin"))
-						{
+						if (loginId != null && loginId.equals("admin")) {
 					%>
-						<div class="form-group">
-							<h4 class="center">관리자 계정으로 로그인 하였습니다.<br><br>
-								확인 버튼 클릭시 메인페이지로 이동합니다.
-							</h4>
-						</div>
-						<div class="buttondiv">
-							<button type="submit" class="btn btn-default">확인</button>
-						</div>
-					<%		
-						}else{
+					<div class="form-group">
+						<h4 class="center">
+							관리자 계정으로 로그인 하였습니다.<br>
+							<br> 확인 버튼 클릭시 메인페이지로 이동합니다.
+						</h4>
+					</div>
+					<div class="buttondiv">
+						<button type="submit" class="btn btn-default">확인</button>
+					</div>
+					<%
+						} else if( loginId != null ) {
 					%>
-						<div class="form-group">
-							<h4 class="center">로그인 성공 하였습니다.<br><br>
-								확인 버튼 클릭시 메인페이지로 이동합니다.
-							</h4>
-						</div>
-						<div class="buttondiv">
-							<button type="submit" class="btn btn-default">확인</button>
-						</div>
-					<%		
-						}
+					<div class="form-group">
+						<h4 class="center">
+							로그인 성공 하였습니다.<br>
+							<br> 확인 버튼 클릭시 메인페이지로 이동합니다.
+						</h4>
+					</div>
+					<div class="buttondiv">
+						<button type="submit" class="btn btn-default">확인</button>
+					<% 
+					} else{
 					%>
-				</form>	
+					<div class="form-group">
+						<h4 class="center">
+							아이디와 비밀번호를 확인하세요<br>
+							<br> 확인 버튼 클릭시 로그인 화면으로 이동합니다.
+						</h4>
+					</div>
+					<div class="buttondiv">
+						<button type="button" onclick="location.href='login.do'"
+							class="btn btn-default">확인</button>
+					</div>
+					<% 	
+					}
+					%>	
+					</div>
+				</form>		
 			</div>
 		</div>		
 		<!-- 발 -->

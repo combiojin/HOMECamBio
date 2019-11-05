@@ -32,10 +32,11 @@ public class MemberDAO {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
 			ResultSet rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) {
 				logincheck = true;
 				MemberDTO mdt = new MemberDTO();
+				
 				mdt.setNum(rs.getInt("num"));
 				mdt.setId(rs.getString("id"));
 				mdt.setPwd(rs.getString("pwd"));
@@ -48,6 +49,7 @@ public class MemberDAO {
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("mdt", mdt);
+				session.setAttribute("id", id);
 			} else {
 				logincheck = false;
 			}

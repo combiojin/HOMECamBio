@@ -9,6 +9,18 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".mytr").css("cursor", "pointer");
+		
+		$(".inputbox").click(function(e) {
+			var seq = $(this).attr("id");
+			$("#"+seq).attr("checked","true");
+//				e.preventDefault(); 기본이벤트제거
+			e.stopPropagation(); //부모태그 이벤트제거
+		});
+		
+		$(".mytr").on('click' , function(e) {
+			var num = $(this).attr("num");
+			location.href = "memberListChange.do?num="+num;
+		});
 
 	});
 
@@ -22,6 +34,7 @@
 </script>
 </head>
 <body>
+<form action="" method="get" id="myform">
 <div class="container">
 		<jsp:include page="/menu.jsp" />
 		<!-- 중간 -->
@@ -41,16 +54,12 @@
 					      <th class="justfly-content-center text-center">체크</th>
 					    </tr>
 					  </thead>
-					<%
-// 						List<MemberVO> list = (List) request.getAttribute("myList");
-// 						for( MemberVO vo :list)
-// 							out.println(vo.getName());
-					%>
 					<c:forEach items="${myList}" var="i">
 						<tbody>
 							<tr class="mytr" num="${i.num}">
 								<th scope="row">${i.num}</th>
-								<td><a href="memberListChange.do" style="color: black;">${i.id}</a></td>
+								<td>${i.id}</td>
+<!-- 								<a href="memberListChange.do" style="color: black;"></a> -->
 								<td>${i.name}</td>
 								<td>${i.birth}</td>
 								<td>${i.gender}</td>
@@ -87,5 +96,6 @@
 			</div>
 		</div>
 	</div>
+</form>	
 </body>
 </html>

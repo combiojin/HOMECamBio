@@ -6,6 +6,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/head.jsp" %>
+<script type="text/javascript">
+function logincheck() {
+	var id = document.getElementById('id').value;
+	var pwd = document.getElementById('pwd').value;
+	
+    if(id == ""){
+        alert("아이디를 입력하세요.");
+    } else if (pwd == "") {
+        alert("비밀번호를 입력하세요.");
+    } else{
+    	$("#myfrm").submit();
+    }
+//     	location.href='loginProc.do'; 
+}
+</script>
 <%
 	Cookie[] cks = request.getCookies();
 	String id = "";
@@ -30,7 +45,7 @@
 			<div class="col-xs-4">
 			</div>
 			<div class="col-xs-4">
-				<form action="${path}/loginProc.do">
+				<form action="${path}/loginProc.do" id="myfrm">
 					<div class="form-group">
 						<label class="labelfont" for="id">아이디:</label>
 						<input type="text" class="form-control" id="id" name="id" value="<%=id%>">
@@ -43,7 +58,7 @@
 						<label><input type="checkbox" name="save" value="true" <%=ck%>> 아이디저장 </label>
 					</div>
 					<div class="buttondiv">
-						<button type="submit" class="btn btn-default">로그인</button>
+						<button type="button" class="btn btn-default" onclick="logincheck();" >로그인</button>
 					</div>
 				</form>
 			</div>

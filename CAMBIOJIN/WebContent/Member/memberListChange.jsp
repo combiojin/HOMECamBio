@@ -20,7 +20,7 @@
 			<div class="col-xs-6 singup">
 				<form action="${path}/memberListChangeProc.do">
 					<h3>관리자 권한으로 전부 수정 가능.</h3>
-					<input type="hidden" name="seq" value="${param.num}">
+					<input type="hidden" name="num" value="${param.num}">
 					<div class="form-group">
 						<label class="labelfont" for="id">아이디:</label> <input type="text"
 							class="form-control" id="id" name="id" value="${mpg.id}"
